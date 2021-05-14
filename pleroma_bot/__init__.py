@@ -154,7 +154,7 @@ class PleromaBot:
 		except ValueError:
 			return
 		except ArgumentParsingError as exc:
-			self.reply(notif, str(exc))
+			return self.reply(notif, str(exc))
 
 		try:
 			handler = self.commands[command_name]
