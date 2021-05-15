@@ -20,9 +20,8 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 # DEALINGS IN THE SOFTWARE.
 
-from mastodon import MastodonError
-
 __all__ = (
+	'PleromaError',
     'CommandError',
     'UserInputError',
     'ArgumentParsingError',
@@ -31,7 +30,10 @@ __all__ = (
     'ExpectedClosingQuoteError',
 )
 
-class CommandError(MastodonError):
+class PleromaError(Exception):
+	pass
+
+class CommandError(PleromaError):
     r"""The base exception type for all command related errors."""
 
 class UserInputError(CommandError):
