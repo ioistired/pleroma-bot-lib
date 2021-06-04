@@ -42,22 +42,6 @@ class PleromaBot:
 		self.commands[command.name] = command
 		return command
 
-	def reply(self, status, content='', **kwargs):
-		# if it's actually a notif, dereference the status
-		status = status.get('status', status)
-		if status['visibility'] in {'public', 'unlisted'}:
-			kwargs['visibility'] = 'unlisted'
-		mentions = [status['account']['acct']]
-		ignored = frozenset([self.me['acct'], status['account']['acct']])
-		for mention in status['mentions']:
-			if mention['acct'] not in ignored:
-				mentions.append(mention['acct'])
-		return self.pleroma.status_post(
-			''.join('@' + mention + ' ' for mention in mentions) + content,
-			in_reply_to_id=status,
-			**kwargs,
-		)
-
 	def prepare_docs(self, docs):
 		docs = docs.format(username=self.me['acct'])
 		docs = inspect.cleandoc(docs)
