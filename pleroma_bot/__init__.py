@@ -53,12 +53,12 @@ class PleromaBot:
 			try:
 				docs = self.commands[command_name].__doc__
 			except KeyError:
-				return self.reply(notif, f'Command {command_name} not found.')
+				return self.pleroma.status_reply(notif['status'], f'Command {command_name} not found.')
 
 			if not docs:
-				return self.reply(notif, f'{command_name}: no help given.')
+				return self.pleroma.status_reply(notif['status'], f'{command_name}: no help given.')
 
-			self.reply(notif, self.prepare_docs(docs))
+			self.pleroma.status_reply(notif['status'], self.prepare_docs(docs))
 		else:
 			topics = []
 			for command in self.commands.values():
@@ -67,8 +67,8 @@ class PleromaBot:
 				else:
 					topics.append(f'• {command.name}')
 
-			self.reply(
-				notif,
+			self.pleroma.status_reply(
+				notif['status'],
 				self.about
 				+ '\nAvailable commands/help topics:\n\n'
 				+ '\n'.join(topics)
@@ -138,7 +138,7 @@ class PleromaBot:
 		except ValueError:
 			return
 		except ArgumentParsingError as exc:
-			return self.reply(notif, str(exc))
+			return self.pleroma.status_reply(notif['status'], str(exc))
 
 		try:
 			handler = self.commands[command_name]
