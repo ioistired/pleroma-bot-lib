@@ -135,7 +135,7 @@ class PleromaBot:
 	def dispatch(self, notif):
 		try:
 			command_name, *command_args = self._parse_args(notif['status']['content'])
-		except ValueError:
+		except (KeyError, ValueError):
 			return
 		except ArgumentParsingError as exc:
 			return self.pleroma.status_reply(notif['status'], str(exc))
