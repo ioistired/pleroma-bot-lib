@@ -18,7 +18,7 @@ setup(
 	keywords='mastodon pleroma api microblogging activitypub bot',
 	packages=['pleroma_bot'],
 	install_requires=[
-		'Mastodon.py @ git+https://github.com/animeavi/Mastodon.py@file_name',
+		'Mastodon.py',
 	],
 	python_requires='>=3.6',
 	classifiers=[
