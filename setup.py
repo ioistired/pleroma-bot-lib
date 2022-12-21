@@ -19,6 +19,7 @@ setup(
 	packages=['pleroma_bot'],
 	install_requires=[
 		'Mastodon.py',
+		'beautifulsoup4',
 	],
 	python_requires='>=3.6',
 	classifiers=[
